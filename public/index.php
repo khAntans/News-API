@@ -49,6 +49,14 @@ switch ($routeInfo[0]) {
         /**
          * @var Response $response
          */
-        echo $twig->render($response->getViewName() . '.twig', $response->getData());
+        try {
+            echo $twig->render($response->getViewName() . '.twig', $response->getData());
+        } catch (\Twig\Error\LoaderError $e) {
+            echo 'Loader Error';
+        } catch (\Twig\Error\RuntimeError $e) {
+            echo 'Runtime error';
+        } catch (\Twig\Error\SyntaxError $e) {
+            echo 'Syntax error';
+        }
         break;
 }
