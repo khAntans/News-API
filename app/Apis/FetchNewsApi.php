@@ -15,7 +15,7 @@ class FetchNewsApi
 
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client = new Client(['verify' => 'C:\Windows\cacert.pem']);
     }
 
     public function fetchTopHeadlines(): ArticleCollection
@@ -41,7 +41,7 @@ class FetchNewsApi
 
     }
 
-    public function fetchEverything()
+    public function fetchEverything(): ArticleCollection
     {
         $params = [
             "q" => $_GET['search'] ?? " ",
@@ -57,7 +57,7 @@ class FetchNewsApi
         return $this->baseFetch($url);
     }
 
-    public function baseFetch(string $url)
+    public function baseFetch(string $url): ArticleCollection
     {
 
         $dotenv = Dotenv::createImmutable('../');
