@@ -29,6 +29,7 @@ class FetchNewsApi
             "country" => $_GET['country'],
             "from" => $_GET['from'] ?? "",
             "to" => $_GET['to'] ?? "",
+            "category" => $_GET['category'] ?? "",
             "pageSize" => 21,
             "page" => $_GET['page'] ?? "1"
         ];

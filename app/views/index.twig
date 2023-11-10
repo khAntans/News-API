@@ -8,12 +8,12 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-<body style="display: grid;">
-<nav class="navbar navbar-light container-fluid" style="background-color: #e3f2fd;margin-bottom: 1rem">
+<body style="display: grid;font-family: 'Twemoji Country Flags','Helvetica Neue', Helvetica, Arial, sans-serif">
+<nav class="navbar navbar-light container-fluid" style="background-color: #e3f2fd;">
     <form action="/" method="GET">
         {#        <select class="form-select" name="country" style="width: 140px;"> #}
 
-        <button value="lv" name="country"> 🇱🇻Latvia</button>
+        <button value="lv" name="country">🇱🇻Latvia</button>
         <button value="us" name="country">🇺🇸United States</button>
         <button value="de" name="country">🇩🇪Germany</button>
 
@@ -35,6 +35,16 @@
         <input type="submit" value="Search">
     </form>
 </nav>
+<nav class="navbar navbar-light container" style="background-color: #e3f2fd;margin-bottom: 1rem">
+    <a class="btn btn-primary" href="{{ baseUri }}&category=business" role="button">business</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=entertainment" role="button">entertainment</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=general" role="button">general</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=health" role="button">health</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=science" role="button">science</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=sports" role="button">sports</a>
+    <a class="btn btn-primary" href="{{ baseUri }}&category=technology" role="button">technology</a>
+
+</nav>
 
 <div class="wrapper" style="width: 900px; justify-self: center">
 
@@ -45,10 +55,11 @@
                 <div class="card mb-4 shadow-sm">
                     <img class="card-img-top" src="{{ article.getUrlToImage }}" alt="{{ article.getTitle }}">
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.getTitle }}</h5>
+                        <a href="{{ article.getUrl }}" target=”_blank”><h5
+                                    class="card-title">{{ article.getTitle }}</h5></a>
                         <p class="card-text">{{ article.getDescription }}</p>
 
-                        <a href="{{ article.getUrl }}" target=”_blank” class="btn btn-primary">Read now</a>
+                        <p class="card-text"><b>{{ article.getSource }}</b></p>
                         <small class="muted-text"><i>Published {{ article.getPublishedAt }}</i></small>
                     </div>
                 </div>
@@ -89,9 +100,7 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+
 <script>
     let today = new Date();
     let priorDate = new Date(new Date().setDate(today.getDate() - 30));
@@ -99,6 +108,11 @@
     document.querySelector('#from').max = today.toISOString().split('T')[0];
     document.querySelector('#to').min = priorDate.toISOString().split('T')[0];
     document.querySelector('#to').max = today.toISOString().split('T')[0];
+</script>
+<script type="module" defer>
+    import {polyfillCountryFlagEmojis} from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+
+    polyfillCountryFlagEmojis();
 </script>
 </body>
 </html>
